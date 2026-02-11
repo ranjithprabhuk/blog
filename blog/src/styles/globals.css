@@ -62,7 +62,7 @@ body * {
 }
 
 .code-block-wrapper pre {
-  @apply !m-0 !rounded-none overflow-x-auto p-4 !bg-gray-900;
+  @apply !m-0 !rounded-none overflow-x-auto px-5 py-5 !bg-gray-900;
   scrollbar-width: thin;
 }
 
