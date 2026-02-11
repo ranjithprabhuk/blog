@@ -41,5 +41,11 @@ export default function PostPage() {
     );
   }
 
-  return <PostDetail post={post} prevPost={prevPost} nextPost={nextPost} />;
+  // Get recent posts excluding the current one
+  const recentPosts = useMemo(() => {
+    if (!index || !slug) return [];
+    return index.posts.filter((p) => p.slug !== slug).slice(0, 3);
+  }, [index, slug]);
+
+  return <PostDetail post={post} prevPost={prevPost} nextPost={nextPost} recentPosts={recentPosts} />;
 }

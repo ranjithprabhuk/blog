@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Badge from "../ui/Badge";
 import AuthorAvatar from "../ui/AuthorAvatar";
+import PostCard from "./PostCard";
 import PostContent from "./PostContent";
 import TableOfContents from "./TableOfContents";
 import MetaTags from "../seo/MetaTags";
@@ -12,12 +13,14 @@ interface PostDetailProps {
   post: ParsedPost;
   prevPost?: PostSummary | null;
   nextPost?: PostSummary | null;
+  recentPosts?: PostSummary[];
 }
 
 export default function PostDetail({
   post,
   prevPost,
   nextPost,
+  recentPosts = [],
 }: PostDetailProps) {
   const { frontmatter, html, headings } = post;
 
@@ -141,6 +144,20 @@ export default function PostDetail({
             <TableOfContents headings={headings} />
           </aside>
         </div>
+
+        {/* Recent Articles */}
+        {recentPosts.length > 0 && (
+          <section className="mt-16 pt-10 border-t border-gray-200 dark:border-gray-800">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight mb-6">
+              Recent Articles
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {recentPosts.map((p) => (
+                <PostCard key={p.slug} post={p} />
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </>
   );

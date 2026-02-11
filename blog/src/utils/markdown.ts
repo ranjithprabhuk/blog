@@ -93,12 +93,21 @@ export function parsePost(
   marked.use({ renderer });
 
   const rawHtml = marked.parse(content) as string;
-  const html = DOMPurify.sanitize(rawHtml, {
+
+  // Strip the first h1 from rendered HTML since PostDetail shows the title from frontmatter
+  const htmlWithoutFirstH1 = rawHtml.replace(/<h1[^>]*>[\s\S]*?<\/h1>/, "");
+
+  const html = DOMPurify.sanitize(htmlWithoutFirstH1, {
     ADD_ATTR: ["data-code", "target"],
     ADD_TAGS: [],
   });
 
-  return { frontmatter, content, html, headings };
+  // Remove the first h1 heading from TOC since it duplicates the post title
+  const filteredHeadings = headings.length > 0 && headings[0].level === 1
+    ? headings.slice(1)
+    : headings;
+
+  return { frontmatter, content, html, headings: filteredHeadings };
 }
 
 export function formatDate(dateStr: string): string {

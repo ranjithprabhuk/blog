@@ -100,6 +100,11 @@ body * {
   @apply text-primary-600 dark:text-primary-400 no-underline hover:underline;
 }
 
+/* Heading anchor links should inherit the heading color, not link color */
+.prose :where(h1, h2, h3, h4, h5, h6) a.anchor-link {
+  @apply text-inherit no-underline hover:no-underline;
+}
+
 .prose table {
   @apply text-sm;
 }
