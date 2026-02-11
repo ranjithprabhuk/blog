@@ -89,6 +89,10 @@
     "Security": 0
   },
   "tags": {
+    "webrtc": 1,
+    "real-time": 1,
+    "javascript": 1,
+    "networking": 1,
     "react": 1,
     "typescript": 1,
     "generics": 1,
@@ -100,10 +104,6 @@
     "postgresql": 1,
     "sql": 1,
     "performance": 1,
-    "database": 1,
-    "webrtc": 1,
-    "real-time": 1,
-    "javascript": 1,
-    "networking": 1
+    "database": 1
   }
 }
