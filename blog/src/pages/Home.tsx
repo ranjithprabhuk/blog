@@ -54,8 +54,11 @@ export default function Home() {
       {/* Hero section */}
       <section className="bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 border-b border-gray-100 dark:border-gray-800">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
-            Resources and Insights
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+            <span className="text-gray-900 dark:text-white">Ranjith&apos;s </span>
+            <span className="bg-gradient-to-r from-primary-500 to-primary-700 dark:from-primary-400 dark:to-primary-600 bg-clip-text text-transparent">
+              Blog
+            </span>
           </h1>
           <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-8">
             {config.blog.description}
