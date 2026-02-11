@@ -21,6 +21,12 @@ export default function PostPage() {
     };
   }, [index, slug]);
 
+  // Get recent posts excluding the current one (must be before early returns)
+  const recentPosts = useMemo(() => {
+    if (!index || !slug) return [];
+    return index.posts.filter((p) => p.slug !== slug).slice(0, 3);
+  }, [index, slug]);
+
   const { post, loading, error } = usePostData(
     postInfo?.folder,
     postInfo?.postId,
@@ -40,12 +46,6 @@ export default function PostPage() {
       </div>
     );
   }
-
-  // Get recent posts excluding the current one
-  const recentPosts = useMemo(() => {
-    if (!index || !slug) return [];
-    return index.posts.filter((p) => p.slug !== slug).slice(0, 3);
-  }, [index, slug]);
 
   return <PostDetail post={post} prevPost={prevPost} nextPost={nextPost} recentPosts={recentPosts} />;
 }
