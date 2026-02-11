@@ -24,49 +24,64 @@ Check all required fields are present and valid:
 |-------|----------|------------|
 | title | Yes | Non-empty, under 100 chars |
 | slug | Yes | Lowercase alphanumeric with hyphens only |
-| excerpt | Yes | Non-empty, under 200 chars |
-| author | Yes | Non-empty |
+| excerpt | Yes | Non-empty, 120-160 chars ideal |
+| author | Yes | Must be "Ranjithprabhu K" |
 | date | Yes | Valid YYYY-MM-DD format |
 | category | Yes | One of: Frontend, Backend, DevOps, Database, Cloud, Security |
 | tags | Yes | Non-empty array of strings |
 | readingTime | Yes | Positive integer |
+| featuredImage | Yes | Must reference ./assets/hero.jpg |
 
 Report any validation errors and stop if critical issues exist.
 
-## Step 3: Calculate Reading Time
+## Step 3: Check Hero Image
+
+Verify `blog-data/{folder}/{postId}/assets/hero.jpg` exists and is > 10KB. If missing, download one from Unsplash matching the post topic:
+
+```bash
+curl -sL "https://images.unsplash.com/photo-{PHOTO_ID}?w=1200&h=630&fit=crop&q=80" \
+  -o blog-data/{folder}/{postId}/assets/hero.jpg
+```
+
+## Step 4: Calculate Reading Time
 
 Count words in the markdown content (excluding frontmatter and code blocks) and calculate:
 - reading time = ceil(word count / 200)
 
 Update the `readingTime` field if it differs from the calculated value.
 
-## Step 4: Update Post
+## Step 5: Update Post
 
 1. Set `draft: false`
 2. Set `updated` to today's date
 3. Ensure `date` is set (use today if missing)
 
-## Step 5: Regenerate Metadata
+## Step 6: Regenerate Metadata
 
-Run: `cd blog-data/scripts && npx tsx generate-index.ts`
+**Always use the script — never manually edit index.json or folder metadata:**
+
+```bash
+cd blog-data/scripts && npx tsx generate-index.ts
+```
 
 This rebuilds:
 - `blog-data/index.json` (master post index)
 - `blog-data/{folder}/metadata.json` (folder metadata)
 
-## Step 6: Verify
+## Step 7: Verify
 
 1. Read the regenerated `index.json` and confirm the post appears
-2. Verify the post is sorted correctly by date
+2. Verify the post is sorted correctly by date (newest first)
+3. Run validation: `cd blog-data/scripts && npx tsx validate-posts.ts`
 
-## Step 7: Report
+## Step 8: Commit and Report
+
+```bash
+git add blog-data/
+git commit -m "publish: {post title}"
+```
 
 Tell the user:
 - Post published successfully
-- Updated fields (reading time, dates)
-- Remind them to commit and push to deploy:
-  ```
-  git add blog-data/
-  git commit -m "Publish: {post title}"
-  git push
-  ```
+- Updated fields (reading time, dates, hero image if added)
+- Remind them to push: `git push origin main`
