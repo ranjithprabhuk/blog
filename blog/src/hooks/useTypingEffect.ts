@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface UseTypingEffectOptions {
   words: string[];
@@ -14,38 +14,55 @@ export function useTypingEffect({
   pauseDuration = 2000,
 }: UseTypingEffectOptions) {
   const [displayText, setDisplayText] = useState("");
-  const [wordIndex, setWordIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  const tick = useCallback(() => {
-    const currentWord = words[wordIndex];
-
-    if (!isDeleting) {
-      // Typing
-      setDisplayText(currentWord.slice(0, displayText.length + 1));
-
-      if (displayText.length === currentWord.length) {
-        // Pause before deleting
-        setTimeout(() => setIsDeleting(true), pauseDuration);
-        return;
-      }
-    } else {
-      // Deleting
-      setDisplayText(currentWord.slice(0, displayText.length - 1));
-
-      if (displayText.length === 0) {
-        setIsDeleting(false);
-        setWordIndex((prev) => (prev + 1) % words.length);
-        return;
-      }
-    }
-  }, [displayText, isDeleting, wordIndex, words, pauseDuration]);
+  const wordIndexRef = useRef(0);
+  const charIndexRef = useRef(0);
+  const isDeletingRef = useRef(false);
+  const isPausedRef = useRef(false);
 
   useEffect(() => {
-    const speed = isDeleting ? deletingSpeed : typingSpeed;
-    const timer = setTimeout(tick, speed);
+    function tick() {
+      const currentWord = words[wordIndexRef.current];
+
+      if (isPausedRef.current) {
+        return;
+      }
+
+      if (!isDeletingRef.current) {
+        // Typing forward
+        charIndexRef.current += 1;
+        setDisplayText(currentWord.slice(0, charIndexRef.current));
+
+        if (charIndexRef.current === currentWord.length) {
+          // Finished typing — pause before deleting
+          isPausedRef.current = true;
+          setTimeout(() => {
+            isPausedRef.current = false;
+            isDeletingRef.current = true;
+            tick();
+          }, pauseDuration);
+          return;
+        }
+      } else {
+        // Deleting
+        charIndexRef.current -= 1;
+        setDisplayText(currentWord.slice(0, charIndexRef.current));
+
+        if (charIndexRef.current === 0) {
+          // Finished deleting — move to next word
+          isDeletingRef.current = false;
+          wordIndexRef.current = (wordIndexRef.current + 1) % words.length;
+        }
+      }
+
+      const speed = isDeletingRef.current ? deletingSpeed : typingSpeed;
+      setTimeout(tick, speed);
+    }
+
+    // Start the loop
+    const timer = setTimeout(tick, typingSpeed);
     return () => clearTimeout(timer);
-  }, [tick, isDeleting, typingSpeed, deletingSpeed]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return displayText;
 }
