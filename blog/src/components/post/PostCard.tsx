@@ -11,22 +11,22 @@ interface PostCardProps {
 
 export default function PostCard({ post }: PostCardProps) {
   return (
-    <article className="group flex flex-col bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden hover:shadow-lg hover:border-gray-300 dark:hover:border-gray-700 transition-all duration-300">
+    <article className="group relative flex flex-col bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden hover:shadow-lg hover:border-gray-300 dark:hover:border-gray-700 transition-all duration-300">
       {/* Featured image */}
       {post.featuredImage && (
-        <Link to={`/post/${post.slug}`} className="block aspect-[16/10] overflow-hidden">
+        <div className="block aspect-[16/10] overflow-hidden">
           <img
             src={getAssetUrl(post.featuredImage)}
             alt={post.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             loading="lazy"
           />
-        </Link>
+        </div>
       )}
 
       <div className="flex flex-col flex-1 p-5">
         {/* Category badge */}
-        <div className="mb-3">
+        <div className="relative z-10 mb-3">
           <Badge
             label={post.category}
             to={`/category/${encodeURIComponent(post.category)}`}
@@ -34,8 +34,8 @@ export default function PostCard({ post }: PostCardProps) {
           />
         </div>
 
-        {/* Title with arrow */}
-        <Link to={`/post/${post.slug}`} className="block mb-2">
+        {/* Title with arrow — stretched link covers entire card */}
+        <Link to={`/post/${post.slug}`} className="block mb-2 after:absolute after:inset-0">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors leading-snug line-clamp-2">
             {post.title}
             <span className="inline-block ml-1 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200">
