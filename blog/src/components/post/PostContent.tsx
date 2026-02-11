@@ -43,7 +43,7 @@ export default function PostContent({ html }: PostContentProps) {
       ref={contentRef}
       className="prose prose-lg dark:prose-invert max-w-none
         prose-headings:scroll-mt-20
-        prose-pre:!p-0 prose-pre:!m-0 prose-pre:!bg-transparent
+        prose-pre:!m-0 prose-pre:!bg-transparent
         prose-code:before:content-none prose-code:after:content-none"
       dangerouslySetInnerHTML={{ __html: html }}
     />
