@@ -11,8 +11,7 @@ const ROTATING_WORDS = [
   "web development",
   "software engineering",
   "modern tech",
-  "cloud & DevOps",
-  "system design",
+  "my engineering journey",
 ];
 
 export default function Home() {
