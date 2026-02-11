@@ -1,0 +1,31 @@
+{
+  "folder": "blogs001",
+  "postCount": 3,
+  "dateRange": {
+    "earliest": "2026-02-05",
+    "latest": "2026-02-10"
+  },
+  "posts": [
+    {
+      "id": "post001",
+      "slug": "type-safe-react-components-typescript-generics",
+      "title": "Building Type-Safe React Components with TypeScript Generics",
+      "date": "2026-02-10",
+      "status": "published"
+    },
+    {
+      "id": "post002",
+      "slug": "docker-multi-stage-builds-optimization",
+      "title": "Docker Multi-Stage Builds: Optimizing Your Container Images",
+      "date": "2026-02-08",
+      "status": "published"
+    },
+    {
+      "id": "post003",
+      "slug": "postgresql-query-optimization-guide",
+      "title": "PostgreSQL Query Optimization: From Slow to Lightning Fast",
+      "date": "2026-02-05",
+      "status": "published"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "blog-data-scripts",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "generate-index": "npx tsx generate-index.ts",
+    "validate-posts": "npx tsx validate-posts.ts"
+  },
+  "devDependencies": {
+    "gray-matter": "^4.0.3",
+    "tsx": "^4.7.0",
+    "typescript": "^5.5.0"
+  }
+}

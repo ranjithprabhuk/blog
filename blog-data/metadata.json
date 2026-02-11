@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "blog": {
+    "title": "Rangit's Blog",
+    "description": "Thoughts on web development, software engineering, and modern tech",
+    "url": "https://ranjithprabhuk.github.io/blog",
+    "postsPerPage": 10
+  },
+  "author": {
+    "name": "Ranjith Prabhu K",
+    "bio": "Full-stack developer passionate about modern web technologies, clean code, and building great user experiences.",
+    "avatar": "assets/author-avatar.jpg",
+    "social": {
+      "github": "ranjithprabhuk",
+      "twitter": "",
+      "linkedin": ""
+    }
+  },
+  "categories": [
+    "Frontend",
+    "Backend",
+    "DevOps",
+    "Database",
+    "Cloud",
+    "Security"
+  ],
+  "repo": {
+    "owner": "ranjithprabhuk",
+    "name": "blog",
+    "branch": "main"
+  }
+}
