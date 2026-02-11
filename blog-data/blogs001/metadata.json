@@ -1,11 +1,18 @@
 {
   "folder": "blogs001",
-  "postCount": 3,
+  "postCount": 4,
   "dateRange": {
     "earliest": "2026-02-05",
-    "latest": "2026-02-10"
+    "latest": "2026-02-11"
   },
   "posts": [
+    {
+      "id": "post004",
+      "slug": "webrtc-real-time-communication-browser",
+      "title": "WebRTC: Building Real-Time Communication in the Browser",
+      "date": "2026-02-11",
+      "status": "published"
+    },
     {
       "id": "post001",
       "slug": "type-safe-react-components-typescript-generics",

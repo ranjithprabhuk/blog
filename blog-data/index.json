@@ -1,8 +1,27 @@
 {
   "version": "1.0",
-  "totalPosts": 3,
-  "lastUpdated": "2026-02-10",
+  "totalPosts": 4,
+  "lastUpdated": "2026-02-11",
   "posts": [
+    {
+      "slug": "webrtc-real-time-communication-browser",
+      "title": "WebRTC: Building Real-Time Communication in the Browser",
+      "excerpt": "A deep dive into WebRTC — how it works under the hood, its core APIs, signaling, NAT traversal, and how to build peer-to-peer audio, video, and data channels from scratch.",
+      "author": "Ranjithprabhu K",
+      "date": "2026-02-11",
+      "updated": "2026-02-11",
+      "category": "Frontend",
+      "tags": [
+        "webrtc",
+        "real-time",
+        "javascript",
+        "networking"
+      ],
+      "readingTime": 12,
+      "folder": "blogs001",
+      "postId": "post004",
+      "featuredImage": "blogs001/post004/assets/hero.jpg"
+    },
     {
       "slug": "type-safe-react-components-typescript-generics",
       "title": "Building Type-Safe React Components with TypeScript Generics",
@@ -62,7 +81,7 @@
     }
   ],
   "categories": {
-    "Frontend": 1,
+    "Frontend": 2,
     "Backend": 0,
     "DevOps": 1,
     "Database": 1,
@@ -81,6 +100,10 @@
     "postgresql": 1,
     "sql": 1,
     "performance": 1,
-    "database": 1
+    "database": 1,
+    "webrtc": 1,
+    "real-time": 1,
+    "javascript": 1,
+    "networking": 1
   }
 }
