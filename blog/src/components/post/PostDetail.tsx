@@ -28,13 +28,24 @@ export default function PostDetail({
         type="article"
       />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+        {/* Back link */}
+        <Link
+          to="/"
+          className="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors mb-8"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to posts
+        </Link>
+
         <div className="flex gap-12">
           {/* Main content */}
           <article className="min-w-0 flex-1 max-w-3xl">
             {/* Header */}
-            <header className="mb-8">
-              <div className="flex items-center gap-2 mb-4">
+            <header className="mb-10">
+              <div className="mb-4">
                 <Badge
                   label={frontmatter.category}
                   to={`/category/${encodeURIComponent(frontmatter.category)}`}
@@ -42,26 +53,33 @@ export default function PostDetail({
                 />
               </div>
 
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6 leading-tight tracking-tight">
                 {frontmatter.title}
               </h1>
 
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-500 dark:text-gray-400">
-                <span>{frontmatter.author}</span>
-                <span>&middot;</span>
-                <time dateTime={frontmatter.date}>
-                  {formatDate(frontmatter.date)}
-                </time>
-                {frontmatter.updated !== frontmatter.date && (
-                  <>
+              {/* Author row */}
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white text-sm font-bold shrink-0">
+                  {frontmatter.author.charAt(0)}
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">
+                    {frontmatter.author}
+                  </p>
+                  <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                    <time dateTime={frontmatter.date}>
+                      {formatDate(frontmatter.date)}
+                    </time>
+                    {frontmatter.updated !== frontmatter.date && (
+                      <>
+                        <span>&middot;</span>
+                        <span>Updated {formatDate(frontmatter.updated)}</span>
+                      </>
+                    )}
                     <span>&middot;</span>
-                    <span>
-                      Updated {formatDate(frontmatter.updated)}
-                    </span>
-                  </>
-                )}
-                <span>&middot;</span>
-                <span>{frontmatter.readingTime} min read</span>
+                    <span>{frontmatter.readingTime} min read</span>
+                  </div>
+                </div>
               </div>
             </header>
 
@@ -69,7 +87,7 @@ export default function PostDetail({
             <PostContent html={html} />
 
             {/* Tags */}
-            <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800">
+            <div className="mt-10 pt-6 border-t border-gray-200 dark:border-gray-800">
               <div className="flex flex-wrap gap-2">
                 {frontmatter.tags.map((tag) => (
                   <Badge
@@ -90,7 +108,7 @@ export default function PostDetail({
                 {prevPost ? (
                   <Link
                     to={`/post/${prevPost.slug}`}
-                    className="group p-4 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-primary-300 dark:hover:border-primary-700 transition-colors"
+                    className="group p-4 border border-gray-200 dark:border-gray-800 rounded-xl hover:border-primary-300 dark:hover:border-primary-700 hover:shadow-sm transition-all"
                   >
                     <span className="text-xs text-gray-400 dark:text-gray-500">
                       &larr; Previous
@@ -105,7 +123,7 @@ export default function PostDetail({
                 {nextPost && (
                   <Link
                     to={`/post/${nextPost.slug}`}
-                    className="group p-4 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-primary-300 dark:hover:border-primary-700 transition-colors text-right"
+                    className="group p-4 border border-gray-200 dark:border-gray-800 rounded-xl hover:border-primary-300 dark:hover:border-primary-700 hover:shadow-sm transition-all text-right"
                   >
                     <span className="text-xs text-gray-400 dark:text-gray-500">
                       Next &rarr;

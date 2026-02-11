@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { useMemo, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import PostList from "../components/post/PostList";
 import Pagination from "../components/ui/Pagination";
 import MetaTags from "../components/seo/MetaTags";
@@ -10,6 +10,8 @@ export default function Home() {
   const { page } = useParams();
   const currentPage = Number(page) || 1;
   const { index, loading, error } = useMetadata();
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   const { posts, totalPages } = useMemo(() => {
     if (!index) return { posts: [], totalPages: 0 };
@@ -20,9 +22,17 @@ export default function Home() {
     return { posts: pagePosts, totalPages: total };
   }, [index, currentPage]);
 
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery("");
+    }
+  };
+
   if (error) {
     return (
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16 text-center">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 text-center">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
           Unable to load posts
         </h2>
@@ -40,16 +50,47 @@ export default function Home() {
   return (
     <>
       <MetaTags />
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
-        <header className="mb-10">
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">
-            Latest Posts
+
+      {/* Hero section */}
+      <section className="bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 border-b border-gray-100 dark:border-gray-800">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20 text-center">
+          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
+            Resources and Insights
           </h1>
-          <p className="text-gray-500 dark:text-gray-400">
+          <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-8">
             {config.blog.description}
           </p>
-        </header>
 
+          {/* Search bar */}
+          <form onSubmit={handleSearch} className="max-w-xl mx-auto">
+            <div className="relative">
+              <svg
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+              <input
+                type="search"
+                placeholder="Search articles..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-12 pr-4 py-3.5 text-base bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent placeholder-gray-400 dark:placeholder-gray-500"
+              />
+            </div>
+          </form>
+        </div>
+      </section>
+
+      {/* Posts grid */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
         <PostList posts={posts} loading={loading} />
         <Pagination currentPage={currentPage} totalPages={totalPages} />
       </div>
