@@ -29,12 +29,14 @@ function PostCardCategory({ category }: { category: string }) {
   }
 
   return (
-    <div className="mb-3" onClick={handleClick}>
-      <Badge
-        label={category}
-        to={`/category/${encodeURIComponent(category)}`}
-        variant="primary"
-      />
+    <div className="mb-3">
+      <span onClick={handleClick}>
+        <Badge
+          label={category}
+          to={`/category/${encodeURIComponent(category)}`}
+          variant="primary"
+        />
+      </span>
     </div>
   );
 }
