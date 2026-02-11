@@ -1,0 +1,43 @@
+name: Validate Blog Data
+
+on:
+  pull_request:
+    paths:
+      - "blog-data/**"
+  push:
+    branches: [main]
+    paths:
+      - "blog-data/**"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: blog-data/scripts/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./blog-data/scripts
+        run: npm ci
+
+      - name: Validate posts
+        working-directory: ./blog-data/scripts
+        run: npx tsx validate-posts.ts
+
+      - name: Regenerate index and check for drift
+        working-directory: ./blog-data/scripts
+        run: |
+          npx tsx generate-index.ts
+          if [[ -n $(git status --porcelain ../index.json ../blogs*/metadata.json) ]]; then
+            echo "index.json or folder metadata is out of sync."
+            echo "Run 'cd blog-data/scripts && npx tsx generate-index.ts' and commit the changes."
+            git diff ../index.json ../blogs*/metadata.json
+            exit 1
+          fi
+          echo "All metadata files are up to date."
