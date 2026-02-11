@@ -58,12 +58,16 @@ body * {
 
 /* Code block styles */
 .code-block-wrapper {
-  @apply relative rounded-lg overflow-hidden my-6;
+  @apply relative rounded-lg overflow-hidden my-6 bg-gray-900;
 }
 
 .code-block-wrapper pre {
-  @apply !m-0 !rounded-none overflow-x-auto;
+  @apply !m-0 !rounded-none overflow-x-auto p-4 !bg-gray-900;
   scrollbar-width: thin;
+}
+
+.code-block-wrapper pre code {
+  @apply text-gray-100 text-sm font-mono leading-relaxed;
 }
 
 .code-header {
