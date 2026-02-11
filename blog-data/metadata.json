@@ -1,13 +1,13 @@
 {
   "version": "1.0",
   "blog": {
-    "title": "Rangit's Blog",
+    "title": "Ranjith's Blog",
     "description": "Thoughts on web development, software engineering, and modern tech",
     "url": "https://ranjithprabhuk.github.io/blog",
     "postsPerPage": 10
   },
   "author": {
-    "name": "Ranjith Prabhu K",
+    "name": "Ranjithprabhu K",
     "bio": "Full-stack developer passionate about modern web technologies, clean code, and building great user experiences.",
     "avatar": "assets/author-avatar.jpg",
     "social": {

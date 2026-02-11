@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Badge from "../ui/Badge";
+import AuthorAvatar from "../ui/AuthorAvatar";
 import PostContent from "./PostContent";
 import TableOfContents from "./TableOfContents";
 import MetaTags from "../seo/MetaTags";
@@ -59,9 +60,7 @@ export default function PostDetail({
 
               {/* Author row */}
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white text-sm font-bold shrink-0">
-                  {frontmatter.author.charAt(0)}
-                </div>
+                <AuthorAvatar name={frontmatter.author} size="md" />
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-white">
                     {frontmatter.author}

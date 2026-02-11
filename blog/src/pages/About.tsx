@@ -1,6 +1,6 @@
 import MetaTags from "../components/seo/MetaTags";
+import AuthorAvatar from "../components/ui/AuthorAvatar";
 import { useMetadata } from "../hooks/useMetadata";
-import { getAssetUrl } from "../utils/api";
 
 export default function About() {
   const { metadata, loading } = useMetadata();
@@ -25,17 +25,9 @@ export default function About() {
       <MetaTags title="About" description={author?.bio || "About the author"} />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16">
         <div className="text-center mb-12">
-          {author?.avatar ? (
-            <img
-              src={getAssetUrl(author.avatar)}
-              alt={author.name}
-              className="w-28 h-28 rounded-full mx-auto mb-6 object-cover ring-4 ring-gray-100 dark:ring-gray-800"
-            />
-          ) : (
-            <div className="w-28 h-28 rounded-full mx-auto mb-6 bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white text-3xl font-bold ring-4 ring-gray-100 dark:ring-gray-800">
-              {author?.name?.charAt(0) || "?"}
-            </div>
-          )}
+          <div className="mb-6 flex justify-center [&_img]:ring-4 [&_img]:ring-gray-100 [&_img]:dark:ring-gray-800 [&_div]:ring-4 [&_div]:ring-gray-100 [&_div]:dark:ring-gray-800">
+            <AuthorAvatar name={author?.name || "?"} size="lg" />
+          </div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-3 tracking-tight">
             {author?.name}
           </h1>

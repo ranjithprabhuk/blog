@@ -2,7 +2,7 @@
 title: "PostgreSQL Query Optimization: From Slow to Lightning Fast"
 slug: "postgresql-query-optimization-guide"
 excerpt: "A practical guide to identifying and fixing slow PostgreSQL queries using EXPLAIN ANALYZE, proper indexing, and query rewriting techniques."
-author: "Ranjith Prabhu K"
+author: "Ranjithprabhu K"
 date: 2026-02-05
 updated: 2026-02-05
 category: "Database"

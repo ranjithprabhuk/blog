@@ -28,7 +28,7 @@ export default function Header() {
             to="/"
             className="text-lg font-bold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
           >
-            Rangit's Blog
+            Ranjith's Blog
           </Link>
 
           {/* Desktop nav */}

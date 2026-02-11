@@ -5,7 +5,7 @@ export const config = {
     branch: "main",
   },
   blog: {
-    title: "Rangit's Blog",
+    title: "Ranjith's Blog",
     description:
       "Thoughts on web development, software engineering, and modern tech",
     postsPerPage: 10,

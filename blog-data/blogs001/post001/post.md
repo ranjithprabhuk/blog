@@ -2,7 +2,7 @@
 title: "Building Type-Safe React Components with TypeScript Generics"
 slug: "type-safe-react-components-typescript-generics"
 excerpt: "Learn how to leverage TypeScript generics to create flexible, reusable React components that maintain full type safety across your application."
-author: "Ranjith Prabhu K"
+author: "Ranjithprabhu K"
 date: 2026-02-10
 updated: 2026-02-10
 category: "Frontend"

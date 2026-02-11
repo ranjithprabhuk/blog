@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            &copy; {new Date().getFullYear()} Ranjith Prabhu K. All rights
+            &copy; {new Date().getFullYear()} Ranjithprabhu K. All rights
             reserved.
           </p>
           <div className="flex items-center gap-4">

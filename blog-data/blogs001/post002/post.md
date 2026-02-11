@@ -2,7 +2,7 @@
 title: "Docker Multi-Stage Builds: Optimizing Your Container Images"
 slug: "docker-multi-stage-builds-optimization"
 excerpt: "Reduce your Docker image sizes by up to 90% using multi-stage builds. Learn practical patterns for Node.js, Go, and Python applications."
-author: "Ranjith Prabhu K"
+author: "Ranjithprabhu K"
 date: 2026-02-08
 updated: 2026-02-08
 category: "DevOps"

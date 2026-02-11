@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Badge from "../ui/Badge";
+import AuthorAvatar from "../ui/AuthorAvatar";
 import { formatDate } from "../../utils/markdown";
 import { getAssetUrl } from "../../utils/api";
 import type { PostSummary } from "../../utils/api";
@@ -10,7 +11,7 @@ interface PostCardProps {
 
 export default function PostCard({ post }: PostCardProps) {
   return (
-    <article className="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden hover:shadow-lg hover:border-gray-300 dark:hover:border-gray-700 transition-all duration-300">
+    <article className="group flex flex-col bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden hover:shadow-lg hover:border-gray-300 dark:hover:border-gray-700 transition-all duration-300">
       {/* Featured image */}
       {post.featuredImage && (
         <Link to={`/post/${post.slug}`} className="block aspect-[16/10] overflow-hidden">
@@ -23,7 +24,7 @@ export default function PostCard({ post }: PostCardProps) {
         </Link>
       )}
 
-      <div className="p-5">
+      <div className="flex flex-col flex-1 p-5">
         {/* Category badge */}
         <div className="mb-3">
           <Badge
@@ -35,7 +36,7 @@ export default function PostCard({ post }: PostCardProps) {
 
         {/* Title with arrow */}
         <Link to={`/post/${post.slug}`} className="block mb-2">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors leading-snug">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors leading-snug line-clamp-2">
             {post.title}
             <span className="inline-block ml-1 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200">
               &rarr;
@@ -48,12 +49,10 @@ export default function PostCard({ post }: PostCardProps) {
           {post.excerpt}
         </p>
 
-        {/* Author + date | Read time */}
-        <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
+        {/* Author + date | Read time — pushed to bottom */}
+        <div className="flex items-center justify-between pt-4 mt-auto border-t border-gray-100 dark:border-gray-800">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
-              {post.author.charAt(0)}
-            </div>
+            <AuthorAvatar name={post.author} size="sm" />
             <div>
               <p className="text-sm font-medium text-gray-900 dark:text-white leading-tight">
                 {post.author}
