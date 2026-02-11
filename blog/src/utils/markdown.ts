@@ -1,4 +1,4 @@
-import matter from "gray-matter";
+import YAML from "yaml";
 import { marked, type Tokens } from "marked";
 import DOMPurify from "dompurify";
 import { getGitHubRawUrl } from "../config";
@@ -28,13 +28,31 @@ export interface ParsedPost {
   headings: Array<{ id: string; text: string; level: number }>;
 }
 
+function extractFrontmatter(raw: string): {
+  frontmatter: Record<string, unknown>;
+  content: string;
+} {
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  if (!match) {
+    return { frontmatter: {}, content: raw };
+  }
+  const frontmatter = YAML.parse(match[1]) || {};
+  // Normalize date fields to strings
+  for (const key of ["date", "updated"]) {
+    if (frontmatter[key] instanceof Date) {
+      frontmatter[key] = frontmatter[key].toISOString().split("T")[0];
+    }
+  }
+  return { frontmatter, content: match[2] };
+}
+
 export function parsePost(
   raw: string,
   folder: string,
   postId: string,
 ): ParsedPost {
-  const { data, content } = matter(raw);
-  const frontmatter = data as PostFrontmatter;
+  const { frontmatter: data, content } = extractFrontmatter(raw);
+  const frontmatter = data as unknown as PostFrontmatter;
   const headings: Array<{ id: string; text: string; level: number }> = [];
 
   // Custom renderer
