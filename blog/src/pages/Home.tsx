@@ -4,7 +4,16 @@ import PostList from "../components/post/PostList";
 import Pagination from "../components/ui/Pagination";
 import MetaTags from "../components/seo/MetaTags";
 import { useMetadata } from "../hooks/useMetadata";
+import { useTypingEffect } from "../hooks/useTypingEffect";
 import { config } from "../config";
+
+const ROTATING_WORDS = [
+  "web development",
+  "software engineering",
+  "modern tech",
+  "cloud & DevOps",
+  "system design",
+];
 
 export default function Home() {
   const { page } = useParams();
@@ -12,6 +21,13 @@ export default function Home() {
   const { index, loading, error } = useMetadata();
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+
+  const typedWord = useTypingEffect({
+    words: ROTATING_WORDS,
+    typingSpeed: 80,
+    deletingSpeed: 50,
+    pauseDuration: 2500,
+  });
 
   const { posts, totalPages } = useMemo(() => {
     if (!index) return { posts: [], totalPages: 0 };
@@ -52,16 +68,34 @@ export default function Home() {
       <MetaTags />
 
       {/* Hero section */}
-      <section className="bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 border-b border-gray-100 dark:border-gray-800">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+      <section className="relative overflow-hidden border-b border-gray-100 dark:border-gray-800">
+        {/* Background pattern */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900" />
+        <div
+          className="absolute inset-0 opacity-[0.4] dark:opacity-[0.15]"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgb(148 163 184 / 0.4) 1px, transparent 0)`,
+            backgroundSize: "24px 24px",
+          }}
+        />
+        {/* Decorative blobs */}
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary-200/30 dark:bg-primary-900/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-blue-200/30 dark:bg-blue-900/20 rounded-full blur-3xl" />
+
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-20 sm:py-28 text-center">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
             <span className="text-gray-900 dark:text-white">Ranjith&apos;s </span>
             <span className="bg-gradient-to-r from-primary-500 to-primary-700 dark:from-primary-400 dark:to-primary-600 bg-clip-text text-transparent">
               Blog
             </span>
           </h1>
-          <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-8">
-            {config.blog.description}
+
+          <p className="text-lg sm:text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-10 h-8">
+            Thoughts on{" "}
+            <span className="text-gray-900 dark:text-white font-medium">
+              {typedWord}
+            </span>
+            <span className="inline-block w-[2px] h-5 bg-primary-500 ml-0.5 align-middle animate-blink" />
           </p>
 
           {/* Search bar */}
@@ -85,7 +119,7 @@ export default function Home() {
                 placeholder="Search articles..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3.5 text-base bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent placeholder-gray-400 dark:placeholder-gray-500"
+                className="w-full pl-12 pr-4 py-3.5 text-base bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent placeholder-gray-400 dark:placeholder-gray-500"
               />
             </div>
           </form>
