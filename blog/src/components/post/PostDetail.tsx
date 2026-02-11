@@ -62,25 +62,33 @@ export default function PostDetail({
               </h1>
 
               {/* Author row */}
-              <div className="flex items-center gap-3">
-                <AuthorAvatar name={frontmatter.author} size="md" />
-                <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">
-                    {frontmatter.author}
-                  </p>
-                  <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                    <time dateTime={frontmatter.date}>
-                      {formatDate(frontmatter.date)}
-                    </time>
-                    {frontmatter.updated !== frontmatter.date && (
-                      <>
-                        <span>&middot;</span>
-                        <span>Updated {formatDate(frontmatter.updated)}</span>
-                      </>
-                    )}
-                    <span>&middot;</span>
-                    <span>{frontmatter.readingTime} min read</span>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <AuthorAvatar name={frontmatter.author} size="md" />
+                  <div>
+                    <p className="text-sm font-medium text-gray-900 dark:text-white">
+                      {frontmatter.author}
+                    </p>
+                    <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                      <time dateTime={frontmatter.date}>
+                        {formatDate(frontmatter.date)}
+                      </time>
+                      {frontmatter.updated !== frontmatter.date && (
+                        <>
+                          <span>&middot;</span>
+                          <span>Updated {formatDate(frontmatter.updated)}</span>
+                        </>
+                      )}
+                    </div>
                   </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-[10px] uppercase tracking-wider text-gray-400 dark:text-gray-500 leading-tight">
+                    Read time
+                  </p>
+                  <p className="text-sm font-semibold text-gray-600 dark:text-gray-300">
+                    {frontmatter.readingTime} min
+                  </p>
                 </div>
               </div>
             </header>
