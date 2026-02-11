@@ -48,16 +48,29 @@ export default function PostCard({ post }: PostCardProps) {
           {post.excerpt}
         </p>
 
-        {/* Author + date row */}
-        <div className="flex items-center gap-3 text-xs text-gray-400 dark:text-gray-500">
-          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white text-[10px] font-bold shrink-0">
-            {post.author.charAt(0)}
+        {/* Author + date | Read time */}
+        <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
+              {post.author.charAt(0)}
+            </div>
+            <div>
+              <p className="text-sm font-medium text-gray-900 dark:text-white leading-tight">
+                {post.author}
+              </p>
+              <time dateTime={post.date} className="text-xs text-gray-400 dark:text-gray-500">
+                {formatDate(post.date)}
+              </time>
+            </div>
           </div>
-          <span className="text-gray-600 dark:text-gray-300 font-medium">{post.author}</span>
-          <span>&middot;</span>
-          <time dateTime={post.date}>{formatDate(post.date)}</time>
-          <span>&middot;</span>
-          <span>{post.readingTime} min</span>
+          <div className="text-right">
+            <p className="text-[10px] uppercase tracking-wider text-gray-400 dark:text-gray-500 leading-tight">
+              Read time
+            </p>
+            <p className="text-sm font-semibold text-gray-600 dark:text-gray-300">
+              {post.readingTime} min
+            </p>
+          </div>
         </div>
       </div>
     </article>
