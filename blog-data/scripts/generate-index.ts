@@ -177,10 +177,11 @@ function main() {
 
   // Build index.json
   const { categories, tags } = buildCategoryAndTagCounts(posts);
+  const lastUpdated = posts.length > 0 ? posts[0].date : "";
   const index = {
     version: "1.0",
     totalPosts: posts.length,
-    lastUpdated: new Date().toISOString(),
+    lastUpdated,
     posts,
     categories,
     tags,
